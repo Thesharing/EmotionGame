@@ -7,15 +7,15 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="870ebe1f-0049-49a4-b1c6-19715f296b57"
-    Publisher="CN=Cyprestar"
+    Name="0c6ff403-4891-48dd-b3db-12c5f20eb439"
+    Publisher="CN=Fing"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="870ebe1f-0049-49a4-b1c6-19715f296b57" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="0c6ff403-4891-48dd-b3db-12c5f20eb439" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>EmotionGame</DisplayName>
-    <PublisherDisplayName>Cyprestar</PublisherDisplayName>
+    <PublisherDisplayName>Fing</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 

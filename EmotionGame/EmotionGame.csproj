@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{7d7b06c8-c22c-40c1-8a31-aef7d35417a8}</ProjectGuid>
+    <ProjectGuid>{7a905f89-bbe7-44a8-865b-5ad5759afd7f}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EmotionGame</RootNamespace>
