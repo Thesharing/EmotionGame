@@ -45,7 +45,7 @@ namespace EmotionGame
         // 定时器部分
         // --------------------------------------------
         DispatcherTimer dispatcherTimer;
-        
+
         public void DispatcherTimerSetup()
         {
             dispatcherTimer = new DispatcherTimer();
@@ -209,6 +209,51 @@ namespace EmotionGame
             }
         }
 
+        public double caculate(double[] x, double[] y)
+        {
+            double count1 = 0;
+            double count2 = 0;
+            double count3 = 0;
+            for (int i = 0; i <= 7; i++)
+            {
+                count1 += x[i] * y[i];
+            }
+            for (int i = 0; i <= 7; i++)
+            {
+                count2 += x[i] * x[i];
+            }
+            for (int i = 0; i <= 7; i++)
+            {
+                count3 += y[i] * y[i];
+            }
+            Log("1: "+count1.ToString()+" 2: "+count2.ToString() + " 3: " + count3.ToString());
+            return (((count1 / Math.Sqrt(count2 * count3) + 1) * 50)-90)*10;
+        }
+
+        public double Scores(Emotion emotion1, Emotion emotion2)
+        {
+            double[] x = new double[8];
+            double[] y = new double[8];
+            x[0] = emotion1.Scores.Anger;
+            x[1] = emotion1.Scores.Contempt;
+            x[2] = emotion1.Scores.Disgust;
+            x[3] = emotion1.Scores.Fear;
+            x[4] = emotion1.Scores.Happiness;
+            x[5] = emotion1.Scores.Neutral;
+            x[6] = emotion1.Scores.Sadness;
+            x[7] = emotion1.Scores.Surprise;
+            y[0] = emotion2.Scores.Anger;
+            y[1] = emotion2.Scores.Contempt;
+            y[2] = emotion2.Scores.Disgust;
+            y[3] = emotion2.Scores.Fear;
+            y[4] = emotion2.Scores.Happiness;
+            y[5] = emotion2.Scores.Neutral;
+            y[6] = emotion2.Scores.Sadness;
+            y[7] = emotion2.Scores.Surprise;
+
+            return caculate(x, y);
+        }
+
         private async void Detect_Click(object sender, RoutedEventArgs e)
         {
             Log("Detecting...");
@@ -217,6 +262,10 @@ namespace EmotionGame
 
             Log("Detection done!");
             LogEmotionResult(emotionResult);
+
+            
+            Log(" Scores : "+Scores(emotionResult[0], emotionResult[1]).ToString());
+
             imagePreivew.Opacity = 0;
             InitCamera();
         }
