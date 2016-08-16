@@ -26,5 +26,9 @@ namespace EmotionGame
         {
             this.InitializeComponent();
         }
+
+        private void startButton_Click(object sender, RoutedEventArgs e) {
+            this.Frame.Navigate(typeof(Game));
+        }
     }
 }
