@@ -96,8 +96,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="CompressImage.cs" />
-    <Compile Include="Game.xaml.cs">
+    <Compile Include="Game.xaml.cs" >
       <DependentUpon>Game.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Introduction.xaml.cs">
       <DependentUpon>Introduction.xaml</DependentUpon>
     </Compile>
