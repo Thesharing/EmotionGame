@@ -10,6 +10,7 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel>
             <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,100,0,0">Hahaha</TextBlock>
+            <Button x:Name="button" Content="Button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="button_Click"/>
         </StackPanel>
     </Grid>
 </Page>

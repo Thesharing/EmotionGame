@@ -26,5 +26,10 @@ namespace EmotionGame
         {
             this.InitializeComponent();
         }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(ImageType));
+        }
     }
 }
