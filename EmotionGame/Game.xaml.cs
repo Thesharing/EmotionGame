@@ -48,6 +48,9 @@ namespace EmotionGame
         private DispatcherTimer dispatcherTimer;
         private MediaCapture captureManager;
 
+        //出题部分
+        private BitmapImage qimg;
+
         public Game() {
             this.InitializeComponent();
             InitCamera();
@@ -321,6 +324,11 @@ namespace EmotionGame
                 SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
                     AppViewBackButtonVisibility.Collapsed;
             }
+
+            Random rm = new Random();
+            int ranNum = rm.Next(0,20);
+            qimg = new BitmapImage(new Uri("ms-appx:///Image/" + ranNum.ToString() + ".png"));
+            q_image.Source = qimg;
         }
 
         public async Task compressImage(StorageFile imageFile) {
