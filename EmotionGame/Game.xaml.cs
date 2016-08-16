@@ -37,11 +37,40 @@ namespace EmotionGame
 
         //Emotion API订阅密钥
         string SubscriptionKey = "af19714575d745d99a3fbf5f5ccf54bf";
+        //图片路径
         string FilePath = "";
+
+        int countdown = 3;
+        // --------------------------------------------
+        // 定时器部分
+        // --------------------------------------------
+        DispatcherTimer dispatcherTimer;
+        
+        public void DispatcherTimerSetup()
+        {
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += DispatcherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1); //设置间隔为1s
+            dispatcherTimer.Start();
+        }
+
+        private void DispatcherTimer_Tick(object sender, object e)
+        {
+            Log(countdown.ToString());
+            countdown--;
+            if (countdown < 0)
+            {
+                dispatcherTimer.Stop();
+                countdown = 3;
+                // TODO
+            }
+        }
+
         public Game()
         {
             this.InitializeComponent();
             InitCamera();
+            DispatcherTimerSetup();
         }
 
         Windows.Media.Capture.MediaCapture captureManager;
