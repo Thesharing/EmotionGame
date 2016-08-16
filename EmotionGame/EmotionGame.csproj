@@ -95,17 +95,15 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="CompressImage.cs" />
     <Compile Include="Game.xaml.cs">
       <DependentUpon>Game.xaml</DependentUpon>
     </Compile>
     <Compile Include="Introduction.xaml.cs">
       <DependentUpon>Introduction.xaml</DependentUpon>
-=======
+    </Compile>
     <Compile Include="ImageType.xaml.cs">
       <DependentUpon>ImageType.xaml</DependentUpon>
->>>>>>> refs/remotes/origin/bank
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -157,15 +155,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-<<<<<<< HEAD
     <Page Include="Game.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Introduction.xaml">
-=======
+    <Page Include="Introduction.xaml" >
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ImageType.xaml">
->>>>>>> refs/remotes/origin/bank
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -178,10 +176,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-<<<<<<< HEAD
-=======
-  <ItemGroup />
->>>>>>> refs/remotes/origin/bank
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
