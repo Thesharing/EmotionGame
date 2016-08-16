@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace EmotionGame {
     class CompressImage {
-        async public BitmapBuffer compressImage() {
+        async public Task<BitmapImage> compressImage() {
             StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync("TestPhoto.jpg");
             using (IRandomAccessStream fileStream = await file.OpenReadAsync()) {
                 BitmapDecoder decoder = await BitmapDecoder.CreateAsync(fileStream);
