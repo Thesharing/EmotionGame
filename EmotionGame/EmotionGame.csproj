@@ -95,12 +95,17 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="CompressImage.cs" />
     <Compile Include="Game.xaml.cs">
       <DependentUpon>Game.xaml</DependentUpon>
     </Compile>
     <Compile Include="Introduction.xaml.cs">
       <DependentUpon>Introduction.xaml</DependentUpon>
+=======
+    <Compile Include="ImageType.xaml.cs">
+      <DependentUpon>ImageType.xaml</DependentUpon>
+>>>>>>> refs/remotes/origin/bank
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -117,6 +122,27 @@
     <None Include="EmotionGame_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Image\1.png" />
+    <Content Include="Image\10.png" />
+    <Content Include="Image\11.png" />
+    <Content Include="Image\0.png" />
+    <Content Include="Image\12.png" />
+    <Content Include="Image\13.png" />
+    <Content Include="Image\14.png" />
+    <Content Include="Image\15.png" />
+    <Content Include="Image\16.png" />
+    <Content Include="Image\17.png" />
+    <Content Include="Image\18.png" />
+    <Content Include="Image\19.png" />
+    <Content Include="Image\2.png" />
+    <Content Include="Image\20.png" />
+    <Content Include="Image\3.png" />
+    <Content Include="Image\4.png" />
+    <Content Include="Image\5.png" />
+    <Content Include="Image\6.png" />
+    <Content Include="Image\7.png" />
+    <Content Include="Image\8.png" />
+    <Content Include="Image\9.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -131,11 +157,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+<<<<<<< HEAD
     <Page Include="Game.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Introduction.xaml">
+=======
+    <Page Include="ImageType.xaml">
+>>>>>>> refs/remotes/origin/bank
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -148,6 +178,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+<<<<<<< HEAD
+=======
+  <ItemGroup />
+>>>>>>> refs/remotes/origin/bank
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

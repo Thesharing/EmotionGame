@@ -1,0 +1,16 @@
+﻿<Page
+    x:Class="EmotionGame.Typechoice"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EmotionGame"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Center">
+        <Button x:Name="image_button" Content="图片" HorizontalAlignment="Center" Height="80" Margin="105,200,105,0" VerticalAlignment="Top" Width="150"/>
+        <Button x:Name="text_button" Content="故事" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="105,285,105,0" Height="80" Width="150"/>
+        <TextBlock x:Name="prompt_textBlock" HorizontalAlignment="Center" Height="60" Margin="0,135,0,0" TextWrapping="Wrap" Text="题　　型" VerticalAlignment="Top" Width="83" FontSize="20"/>
+
+    </Grid>
+</Page>
