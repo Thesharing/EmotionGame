@@ -243,3 +243,4 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+EmotionGame/Game.xaml.cs.orig

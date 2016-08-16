@@ -298,22 +298,14 @@ namespace EmotionGame
 
             double score = 0;
             try {
-                score = Scores(emotionResult[0], emotionResult[1]);
-                Log(" Scores : " + score.ToString());
+                Log(" Scores : " + Scores(emotionResult[0], emotionResult[1]).ToString());
             }
             catch {
                 Log("ERROR");
             }
             imagePreivew.Opacity = 0;
             InitCamera();
-
-            Info info = new Info();
-            info.Score = score;
-            info.Age1 = age1;
-            info.Age2 = age2;
-            info.Gender1 = gender1;
-            info.Gender2 = gender2;
-            Frame.Navigate(typeof(Result),info);
+            Frame.Navigate(typeof(Result));
         }
 
         public async Task compressImage(StorageFile imageFile) {

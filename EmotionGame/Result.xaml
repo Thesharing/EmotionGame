@@ -20,7 +20,7 @@
                 <Grid Grid.Row="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="0.5*" />
-                            <RowDefinition Height="*" />
+                            <RowDefinition Height="1*" />
                             <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
                             <RowDefinition Height="2*" />
@@ -29,10 +29,10 @@
                             HorizontalAlignment="Center" VerticalAlignment="Center"
                                FontSize="32"/>
                     <TextBlock Name="resultTextBlock" Grid.Row="2"  Text=" " 
-                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48"/>
                     <TextBlock Name="commentTextBlock" Grid.Row="3" Text=" "
-                               HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <Image Name="image" Grid.Row="3" VerticalAlignment="Center"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" />
+                    <Image Name="image" Grid.Row="4" VerticalAlignment="Center"
                            HorizontalAlignment="Center"/>
                 </Grid>
                 <Grid Grid.Row="1" Grid.Column="1" Name="buttonGrid">
