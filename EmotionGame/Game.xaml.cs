@@ -33,7 +33,14 @@ using Windows.UI.Core;
 
 namespace EmotionGame
 {
-    //public string Emotion1
+    public class Info
+    {
+        public double Score { get; set; }
+        public double Age1 { get; set; }
+        public double Age2 { get; set; }
+        public string Gender1 { get; set; }
+        public string Gender2 { get; set; }
+    }
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
@@ -50,6 +57,11 @@ namespace EmotionGame
 
         //出题部分
         private BitmapImage qimg;
+
+        private double age1 = 0;
+        private double age2 = 0;
+        private string gender1 = "";
+        private string gender2 = "";
 
         public Game() {
             this.InitializeComponent();
@@ -228,6 +240,14 @@ namespace EmotionGame
                     Log("  Age     : " + face.FaceAttributes.Age.ToString());
                 }
             }
+            if (faceResult.Length == 2)
+            {
+                age1 = faceResult[0].FaceAttributes.Age;
+                age2 = faceResult[1].FaceAttributes.Age;
+                gender1 = faceResult[0].FaceAttributes.Gender;
+                gender2 = faceResult[1].FaceAttributes.Gender;
+                
+            }
         }
 
         public double calculate(double[] x, double[] y)
@@ -300,15 +320,24 @@ namespace EmotionGame
 
             DetectFace();
 
+            double score = 0;
             try {
-                Log(" Scores : " + Scores(emotionResult[0], emotionResult[1]).ToString());
+                score = Scores(emotionResult[0], emotionResult[1]);
+                Log(" Scores : " + score.ToString());
             }
             catch {
                 Log("ERROR");
             }
             imagePreivew.Opacity = 0;
             InitCamera();
-            Frame.Navigate(typeof(Result));
+
+            Info info = new Info();
+            info.Score = score;
+            info.Age1 = age1;
+            info.Age2 = age2;
+            info.Gender1 = gender1;
+            info.Gender2 = gender2;
+            Frame.Navigate(typeof(Result),info);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e) {
