@@ -13,38 +13,24 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace EmotionGame
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class Introduction : Page
     {
-        public MainPage()
+        public Introduction()
         {
             this.InitializeComponent();
         }
 
-        private void maintext_SelectionChanged(object sender, RoutedEventArgs e)
+        private void backbtn_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(MainPage));
         }
 
-        private void stratbtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void exitbtn_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Exit();
-        }
-
-        private void introductionbtn_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(Introduction));
-        }
     }
 }

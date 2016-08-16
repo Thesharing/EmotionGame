@@ -8,9 +8,29 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel>
-            <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="0,100,0,0">Hahaha</TextBlock>
-            <Button Name="startButton" HorizontalAlignment="Center" Height="30" Width="100" Click="startButton_Click"/>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <!--<RowDefinition Height="*" />-->
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="maintext" 
+                Grid.Row="0"
+                FontSize="40" HorizontalAlignment="Center" 
+                SelectionChanged="maintext_SelectionChanged" 
+                TextAlignment="Center" VerticalAlignment="Center" Text="微默契"/>
+        <Button Grid.Row="1" 
+                Name="stratbtn" 
+                Content="开始游戏" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                FontFamily="Rockwell Extra Bold" 
+                Click="stratbtn_Click"/>
+        <Button Name="introductionbtn" Grid.Row="2" Content="游戏介绍" 
+                HorizontalAlignment="Center" VerticalAlignment="Center" 
+                Click="introductionbtn_Click"/>
+        <Button x:Name="exitbtn" Content="退出游戏" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" 
+                Click="exitbtn_Click" />
     </Grid>
 </Page>
