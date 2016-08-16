@@ -72,7 +72,6 @@ namespace EmotionGame
                 if (countdown == 0) {
                     dispatcherTimer.Stop();
                     countdown = 5;
-                    // TODO
                     CapturePhoto();
                 }
             }
@@ -102,8 +101,10 @@ namespace EmotionGame
                 CreationCollisionOption.GenerateUniqueName);
             // take photo
             await captureManager.CapturePhotoToStorageFileAsync(imgFormat, file);
-            await captureManager.StopPreviewAsync();
-            captureManager.Dispose();
+            if (captureManager != null) {
+                await captureManager.StopPreviewAsync();
+                captureManager.Dispose();
+            }
             await compressImage(file);
 
             // Get photo as a BitmapImage
@@ -139,19 +140,10 @@ namespace EmotionGame
         /// <returns></returns>
         private async Task<Emotion[]> UploadAndDetectEmotions(string imageFilePath)
         {
-            //MainWindow window = (MainWindow)Application.Current.MainWindow;
-            //string subscriptionKey = window.ScenarioControl.SubscriptionKey;
             string subscriptionKey = SubscriptionKey;
 
             Log("EmotionServiceClient is created");
 
-            // -----------------------------------------------------------------------
-            // KEY SAMPLE CODE STARTS HERE
-            // -----------------------------------------------------------------------
-
-            //
-            // Create Project Oxford Emotion API Service client
-            //
             EmotionServiceClient emotionServiceClient = new EmotionServiceClient(subscriptionKey);
 
             Log("Calling EmotionServiceClient.RecognizeAsync()...");
@@ -160,9 +152,6 @@ namespace EmotionGame
                 Emotion[] emotionResult;
                 using (Stream imageFileStream = File.OpenRead(imageFilePath))
                 {
-                    //
-                    // Detect the emotions in the URL
-                    //
                     emotionResult = await emotionServiceClient.RecognizeAsync(imageFileStream);
                     return emotionResult;
                 }
@@ -172,10 +161,6 @@ namespace EmotionGame
                 Log(exception.ToString());
                 return null;
             }
-            // -----------------------------------------------------------------------
-            // KEY SAMPLE CODE ENDS HERE
-            // -----------------------------------------------------------------------
-
         }
 
         public void LogEmotionResult(Emotion[] emotionResult)
