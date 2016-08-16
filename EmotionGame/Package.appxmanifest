@@ -7,11 +7,11 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="0c6ff403-4891-48dd-b3db-12c5f20eb439"
+    Name="46f8350a-8367-496b-82d1-3a79052c6391"
     Publisher="CN=Fing"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="0c6ff403-4891-48dd-b3db-12c5f20eb439" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="46f8350a-8367-496b-82d1-3a79052c6391" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>EmotionGame</DisplayName>

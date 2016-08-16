@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmotionGame", "EmotionGame\EmotionGame.csproj", "{7A905F89-BBE7-44A8-865B-5AD5759AFD7F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmotionGame", "EmotionGame\EmotionGame.csproj", "{7B6309C2-1995-4179-9F75-FE5773D9178B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7A905F89-BBE7-44A8-865B-5AD5759AFD7F}.Debug|ARM.ActiveCfg = Debug|ARM
-		{7A905F89-BBE7-44A8-865B-5AD5759AFD7F}.Debug|ARM.Build.0 = Debug|ARM
-		{7A905F89-BBE7-44A8-865B-5AD5759AFD7F}.Debug|ARM.Deploy.0 = Debug|ARM
-		{7A905F89-BBE7-44A8-865B-5AD5759AFD7F}.Debug|x64.ActiveCfg = Debug|x64
-		{7A905F89-BBE7-44A8-865B-5AD5759AFD7F}.Debug|x64.Build.0 = Debug|x64
-		{7A905F89-BBE7-44A8-865B-5AD5759AFD7F}.Debug|x64.Deploy.0 = Debug|x64
-		{7A905F89-BBE7-44A8-865B-5AD5759AFD7F}.Debug|x86.ActiveCfg = Debug|x86
-		{7A905F89-BBE7-44A8-865B-5AD5759AFD7F}.Debug|x86.Build.0 = Debug|x86
-		{7A905F89-BBE7-44A8-865B-5AD5759AFD7F}.Debug|x86.Deploy.0 = Debug|x86
-		{7A905F89-BBE7-44A8-865B-5AD5759AFD7F}.Release|ARM.ActiveCfg = Release|ARM
-		{7A905F89-BBE7-44A8-865B-5AD5759AFD7F}.Release|ARM.Build.0 = Release|ARM
-		{7A905F89-BBE7-44A8-865B-5AD5759AFD7F}.Release|ARM.Deploy.0 = Release|ARM
-		{7A905F89-BBE7-44A8-865B-5AD5759AFD7F}.Release|x64.ActiveCfg = Release|x64
-		{7A905F89-BBE7-44A8-865B-5AD5759AFD7F}.Release|x64.Build.0 = Release|x64
-		{7A905F89-BBE7-44A8-865B-5AD5759AFD7F}.Release|x64.Deploy.0 = Release|x64
-		{7A905F89-BBE7-44A8-865B-5AD5759AFD7F}.Release|x86.ActiveCfg = Release|x86
-		{7A905F89-BBE7-44A8-865B-5AD5759AFD7F}.Release|x86.Build.0 = Release|x86
-		{7A905F89-BBE7-44A8-865B-5AD5759AFD7F}.Release|x86.Deploy.0 = Release|x86
+		{7B6309C2-1995-4179-9F75-FE5773D9178B}.Debug|ARM.ActiveCfg = Debug|ARM
+		{7B6309C2-1995-4179-9F75-FE5773D9178B}.Debug|ARM.Build.0 = Debug|ARM
+		{7B6309C2-1995-4179-9F75-FE5773D9178B}.Debug|ARM.Deploy.0 = Debug|ARM
+		{7B6309C2-1995-4179-9F75-FE5773D9178B}.Debug|x64.ActiveCfg = Debug|x64
+		{7B6309C2-1995-4179-9F75-FE5773D9178B}.Debug|x64.Build.0 = Debug|x64
+		{7B6309C2-1995-4179-9F75-FE5773D9178B}.Debug|x64.Deploy.0 = Debug|x64
+		{7B6309C2-1995-4179-9F75-FE5773D9178B}.Debug|x86.ActiveCfg = Debug|x86
+		{7B6309C2-1995-4179-9F75-FE5773D9178B}.Debug|x86.Build.0 = Debug|x86
+		{7B6309C2-1995-4179-9F75-FE5773D9178B}.Debug|x86.Deploy.0 = Debug|x86
+		{7B6309C2-1995-4179-9F75-FE5773D9178B}.Release|ARM.ActiveCfg = Release|ARM
+		{7B6309C2-1995-4179-9F75-FE5773D9178B}.Release|ARM.Build.0 = Release|ARM
+		{7B6309C2-1995-4179-9F75-FE5773D9178B}.Release|ARM.Deploy.0 = Release|ARM
+		{7B6309C2-1995-4179-9F75-FE5773D9178B}.Release|x64.ActiveCfg = Release|x64
+		{7B6309C2-1995-4179-9F75-FE5773D9178B}.Release|x64.Build.0 = Release|x64
+		{7B6309C2-1995-4179-9F75-FE5773D9178B}.Release|x64.Deploy.0 = Release|x64
+		{7B6309C2-1995-4179-9F75-FE5773D9178B}.Release|x86.ActiveCfg = Release|x86
+		{7B6309C2-1995-4179-9F75-FE5773D9178B}.Release|x86.Build.0 = Release|x86
+		{7B6309C2-1995-4179-9F75-FE5773D9178B}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
