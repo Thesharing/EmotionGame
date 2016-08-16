@@ -21,6 +21,7 @@ using System.Threading.Tasks;
 // namesapce for EmotionServiceClient
 using Microsoft.ProjectOxford.Emotion;
 using Microsoft.ProjectOxford.Emotion.Contract;
+using Windows.UI.Core;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -227,7 +228,7 @@ namespace EmotionGame
                 count3 += y[i] * y[i];
             }
             Log("1: "+count1.ToString()+" 2: "+count2.ToString() + " 3: " + count3.ToString());
-            return (((count1 / Math.Sqrt(count2 * count3) + 1) * 50)-90)*10;
+            return (((count1 / Math.Sqrt(count2 * count3) + 1) * 50) - 90)*10;
         }
 
         public double Scores(Emotion emotion1, Emotion emotion2)
@@ -264,10 +265,26 @@ namespace EmotionGame
             LogEmotionResult(emotionResult);
 
             
-            Log(" Scores : "+Scores(emotionResult[0], emotionResult[1]).ToString());
+            //Log(" Scores : "+Scores(emotionResult[0], emotionResult[1]).ToString());
 
             imagePreivew.Opacity = 0;
             InitCamera();
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e) {
+            Frame rootFrame = Window.Current.Content as Frame;
+
+            if (rootFrame.CanGoBack) {
+                // Show UI in title bar if opted-in and in-app backstack is not empty.
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                    AppViewBackButtonVisibility.Visible;
+            }
+            else {
+                // Remove the UI from the title bar if in-app back stack is empty.
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                    AppViewBackButtonVisibility.Collapsed;
+            }
+        }
+
     }
 }
