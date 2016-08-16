@@ -23,9 +23,9 @@
                 <ColumnDefinition Width="50*"/>
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" Click="CapturePhoto_Click" Content="Capture Photo" 
-                HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                HorizontalAlignment="Center" VerticalAlignment="Center" Background="{ThemeResource ButtonBackgroundThemeBrush}"/>
             <Button Grid.Column="1" Content="Detect"  
-                    HorizontalAlignment="Center" VerticalAlignment="Center" Click="Detect_Click"/>
+                    HorizontalAlignment="Center" VerticalAlignment="Center" Click="Detect_Click" Background="{ThemeResource ButtonBackgroundThemeBrush}"/>
         </Grid>
         
         <TextBox x:Name="logBox" Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Text="Info here"></TextBox>
