@@ -13,31 +13,25 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace EmotionGame {
     class CompressImage {
-        async public Task<BitmapImage> compressImage() {
+        public static async Task compressImage() {
             StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync("TestPhoto.jpg");
             using (IRandomAccessStream fileStream = await file.OpenReadAsync()) {
                 BitmapDecoder decoder = await BitmapDecoder.CreateAsync(fileStream);
-                using (var encoderStream = new InMemoryRandomAccessStream()) {
-                    BitmapEncoder encoder = await BitmapEncoder.CreateForTranscodingAsync(encoderStream, decoder);
-                    var newHeight = decoder.PixelHeight / 2;
-                    var newWidth = decoder.PixelWidth / 2;
-                    encoder.BitmapTransform.ScaledHeight = newHeight;
-                    encoder.BitmapTransform.ScaledWidth = newWidth;
 
-                    await encoder.FlushAsync();
+                var memStream = new Windows.Storage.Streams.InMemoryRandomAccessStream();
+                BitmapEncoder encoder = await BitmapEncoder.CreateForTranscodingAsync(memStream, decoder);
 
-                    byte[] pixels = new byte[newWidth * newHeight * 4];
+                encoder.BitmapTransform.ScaledWidth = 640;
+                encoder.BitmapTransform.ScaledHeight = 480;
 
-                    await encoderStream.ReadAsync(pixels.AsBuffer(), (uint)pixels.Length, InputStreamOptions.None);
+                await encoder.FlushAsync();
 
-                    BitmapImage image = new BitmapImage();
-                    using (InMemoryRandomAccessStream stream = new InMemoryRandomAccessStream()) {
-                        await stream.WriteAsync(pixels.AsBuffer());
-                        stream.Seek(0);
-                        await image.SetSourceAsync(stream);
-                    }
-                    return image;
-                }
+                memStream.Seek(0);
+                fileStream.Seek(0);
+                fileStream.Size = 0;
+                await RandomAccessStream.CopyAsync(memStream, fileStream);
+
+                memStream.Dispose();
             }
         }
     }

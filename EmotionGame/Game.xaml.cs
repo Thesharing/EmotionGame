@@ -25,6 +25,11 @@ using Microsoft.ProjectOxford.Emotion.Contract;
 // namesapce for Face
 using Microsoft.ProjectOxford.Face;
 using Microsoft.ProjectOxford.Face.Contract;
+using Windows.Storage.Streams;
+using Windows.Graphics.Imaging;
+
+using LLM;
+using Windows.UI.Core;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -44,7 +49,7 @@ namespace EmotionGame
         //图片路径
         string FilePath = "";
 
-        int countdown = 3;
+        int countdown = 5;
         // --------------------------------------------
         // 定时器部分
         // --------------------------------------------
@@ -62,11 +67,15 @@ namespace EmotionGame
         {
             Log(countdown.ToString());
             countdown--;
-            if (countdown < 0)
-            {
-                dispatcherTimer.Stop();
-                countdown = 3;
-                // TODO
+            if (countdown <= 3) {
+                Animator.Use(AnimationType.FadeIn).SetDuration(TimeSpan.FromMilliseconds(800)).PlayOn(countdownText);
+                countdownText.Text = countdown.ToString();
+                if (countdown == 0) {
+                    dispatcherTimer.Stop();
+                    countdown = 5;
+                    // TODO
+                    CapturePhoto();
+                }
             }
         }
 
@@ -87,34 +96,33 @@ namespace EmotionGame
             await captureManager.StartPreviewAsync();
         }
 
-        async private void StopCapturePreview()
+        private async void CapturePhoto_Click(object sender, RoutedEventArgs e)
         {
-            await captureManager.StopPreviewAsync();
+            CapturePhoto();
         }
 
-        async private void CapturePhoto_Click(object sender, RoutedEventArgs e)
-        {
+        private async void CapturePhoto() {
             ImageEncodingProperties imgFormat = ImageEncodingProperties.CreateJpeg();
 
             // create storage file in local app storage
             StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync(
                 "TestPhoto.jpg",
                 CreationCollisionOption.GenerateUniqueName);
-
             // take photo
             await captureManager.CapturePhotoToStorageFileAsync(imgFormat, file);
+            await captureManager.StopPreviewAsync();
+            captureManager.Dispose();
+            await compressImage(file);
 
             // Get photo as a BitmapImage
             BitmapImage bmpImage = new BitmapImage(new Uri(file.Path));
-
             // imagePreivew is a <Image> object defined in XAML
             imagePreivew.Source = bmpImage;
             imagePreivew.Opacity = 1;
 
             Log("Capture finished!");
             FilePath = file.Path;
-
-            StopCapturePreview();
+            Detect();
         }
 
         public void Log(string logMessage)
@@ -284,6 +292,10 @@ namespace EmotionGame
 
         private async void Detect_Click(object sender, RoutedEventArgs e)
         {
+            Detect();
+        }
+
+        private async void Detect() {
             Log("Detecting...");
 
             Emotion[] emotionResult = await UploadAndDetectEmotions(FilePath);
@@ -293,18 +305,51 @@ namespace EmotionGame
 
             DetectFace();
 
-            try
-            {
+            try {
                 Log(" Scores : " + Scores(emotionResult[0], emotionResult[1]).ToString());
             }
-            catch
-            {
+            catch {
                 Log("ERROR");
             }
-            
-
             imagePreivew.Opacity = 0;
             InitCamera();
+            Frame.Navigate(typeof(Result));
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e) {
+            base.OnNavigatedTo(e);
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame.CanGoBack) {
+                // Show UI in title bar if opted-in and in-app backstack is not empty.
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                    AppViewBackButtonVisibility.Visible;
+            }
+            else {
+                // Remove the UI from the title bar if in-app back stack is empty.
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                    AppViewBackButtonVisibility.Collapsed;
+            }
+        }
+
+        public async Task compressImage(StorageFile imageFile) {
+            using (IRandomAccessStream fileStream = await imageFile.OpenAsync(FileAccessMode.ReadWrite)) {
+                BitmapDecoder decoder = await BitmapDecoder.CreateAsync(fileStream);
+
+                var memStream = new Windows.Storage.Streams.InMemoryRandomAccessStream();
+                BitmapEncoder encoder = await BitmapEncoder.CreateForTranscodingAsync(memStream, decoder);
+
+                encoder.BitmapTransform.ScaledWidth = 320;
+                encoder.BitmapTransform.ScaledHeight = 240;
+
+                await encoder.FlushAsync();
+
+                memStream.Seek(0);
+                fileStream.Seek(0);
+                fileStream.Size = 0;
+                await RandomAccessStream.CopyAsync(memStream, fileStream);
+
+                memStream.Dispose();
+            }
         }
     }
 }

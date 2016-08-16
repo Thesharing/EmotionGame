@@ -1,5 +1,6 @@
 ﻿{
   "dependencies": {
+    "LLMAnimator": "0.1.0",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
     "Microsoft.ProjectOxford.Common": "1.0.308",
     "Microsoft.ProjectOxford.Emotion": "1.0.326",

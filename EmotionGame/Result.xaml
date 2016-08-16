@@ -1,0 +1,31 @@
+﻿<Page
+    x:Class="EmotionGame.Result"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EmotionGame"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Name="resultTextBlock" Text="Result" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid Grid.Row="1" Name="buttonGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Name="buttonRetry" Content="再试一次" Height="30" Width="100"
+                    HorizontalAlignment="Center" VerticalAlignment="Center" 
+                    Click="buttonRetry_Click"/>
+            <Button Name="buttonShare" Content="分享" Height="30" Width="100"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Grid.Column="1" IsEnabled="False"/>
+        </Grid>
+    </Grid>
+</Page>
