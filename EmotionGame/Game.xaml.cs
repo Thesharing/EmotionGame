@@ -102,6 +102,8 @@ namespace EmotionGame
         }
 
         private async void CapturePhoto() {
+            progressRing.IsActive = true;
+            progressRing.Visibility = Visibility.Visible;
             ImageEncodingProperties imgFormat = ImageEncodingProperties.CreateJpeg();
 
             // create storage file in local app storage
