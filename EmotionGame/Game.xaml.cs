@@ -31,29 +31,28 @@ using Windows.Graphics.Imaging;
 using LLM;
 using Windows.UI.Core;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace EmotionGame
 {
-
     //public string Emotion1
-
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class Game : Page
     {
-
         //Emotion API订阅密钥
-        string SubscriptionKey = "af19714575d745d99a3fbf5f5ccf54bf";
+        private string SubscriptionKey = "af19714575d745d99a3fbf5f5ccf54bf";
         //图片路径
-        string FilePath = "";
-
-        int countdown = 5;
-        // --------------------------------------------
+        private string FilePath = "";
+        private int countdown = 5;
         // 定时器部分
-        // --------------------------------------------
-        DispatcherTimer dispatcherTimer;
+        private DispatcherTimer dispatcherTimer;
+        private MediaCapture captureManager;
+
+        public Game() {
+            this.InitializeComponent();
+            InitCamera();
+            DispatcherTimerSetup();
+        }
 
         public void DispatcherTimerSetup()
         {
@@ -78,15 +77,6 @@ namespace EmotionGame
                 }
             }
         }
-
-        public Game()
-        {
-            this.InitializeComponent();
-            InitCamera();
-            DispatcherTimerSetup();
-        }
-
-        Windows.Media.Capture.MediaCapture captureManager;
 
         async private void InitCamera()
         {
