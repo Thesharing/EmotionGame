@@ -229,29 +229,14 @@ namespace EmotionGame
 
         public double calculate(double[] x, double[] y)
         {
-            //double count1 = 0;
-            //double count2 = 0;
-            //double count3 = 0;
-            //for (int i = 0; i <= 7; i++)
-            //{
-            //    count1 += x[i] * y[i];
-            //}
-            //for (int i = 0; i <= 7; i++)
-            //{
-            //    count2 += x[i] * x[i];
-            //}
-            //for (int i = 0; i <= 7; i++)
-            //{
-            //    count3 += y[i] * y[i];
-            //}
-            //Log("1: " + count1.ToString() + " 2: " + count2.ToString() + " 3: " + count3.ToString());
-            //return (((count1 / Math.Sqrt(count2 * count3) + 1) * 50) - 90) * 10;
             double count = 0;
             for (int i = 0; i < 7; i++)
             {
                 count += Math.Pow(x[i] - y[i], 2);
             }
-            return Math.Sqrt(count / 8) * 50;
+            count = Math.Sqrt(count / 8) * 50;
+            count = (2 - Math.Log10(count)) * 100;
+            return count;
         }
 
         public double Scores(Emotion emotion1, Emotion emotion2)
