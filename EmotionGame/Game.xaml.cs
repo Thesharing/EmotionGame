@@ -22,6 +22,10 @@ using System.Threading.Tasks;
 using Microsoft.ProjectOxford.Emotion;
 using Microsoft.ProjectOxford.Emotion.Contract;
 
+// namesapce for Face
+using Microsoft.ProjectOxford.Face;
+using Microsoft.ProjectOxford.Face.Contract;
+
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace EmotionGame
@@ -209,6 +213,20 @@ namespace EmotionGame
             }
         }
 
+        public void LogFaceResult(Face[] faceResult)
+        {
+            int faceResultCount = 0;
+            if (faceResult != null && faceResult.Length > 0)
+            {
+                foreach (Face face in faceResult)
+                {
+                    Log("Face[" + faceResultCount + "]");
+                    Log("  Gender  : " + face.FaceAttributes.Gender);
+                    Log("  Age     : " + face.FaceAttributes.Age.ToString());
+                }
+            }
+        }
+
         public double caculate(double[] x, double[] y)
         {
             double count1 = 0;
@@ -226,8 +244,8 @@ namespace EmotionGame
             {
                 count3 += y[i] * y[i];
             }
-            Log("1: "+count1.ToString()+" 2: "+count2.ToString() + " 3: " + count3.ToString());
-            return (((count1 / Math.Sqrt(count2 * count3) + 1) * 50)-90)*10;
+            Log("1: " + count1.ToString() + " 2: " + count2.ToString() + " 3: " + count3.ToString());
+            return (((count1 / Math.Sqrt(count2 * count3) + 1) * 50) - 90) * 10;
         }
 
         public double Scores(Emotion emotion1, Emotion emotion2)
@@ -254,6 +272,25 @@ namespace EmotionGame
             return caculate(x, y);
         }
 
+        private async void DetectFace()
+        {
+            using (var fileStream = File.OpenRead(FilePath))
+            {
+                try
+                {
+                    string subscriptionKey = "21d760920ac646fca6ee25b6b6f44f0b";
+
+                    var faceServiceClient = new FaceServiceClient(subscriptionKey);
+                    Face[] faces = await faceServiceClient.DetectAsync(fileStream, false, true, new FaceAttributeType[] { FaceAttributeType.Gender, FaceAttributeType.Age, FaceAttributeType.Smile, FaceAttributeType.Glasses });
+                    LogFaceResult(faces);
+                }
+                catch (FaceAPIException ex)
+                {
+                    Log(ex.ErrorMessage);
+                }
+            }
+        }
+
         private async void Detect_Click(object sender, RoutedEventArgs e)
         {
             Log("Detecting...");
@@ -263,8 +300,9 @@ namespace EmotionGame
             Log("Detection done!");
             LogEmotionResult(emotionResult);
 
-            
-            Log(" Scores : "+Scores(emotionResult[0], emotionResult[1]).ToString());
+            DetectFace();
+
+            //Log(" Scores : " + Scores(emotionResult[0], emotionResult[1]).ToString());
 
             imagePreivew.Opacity = 0;
             InitCamera();
