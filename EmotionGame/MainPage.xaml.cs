@@ -28,8 +28,24 @@ namespace EmotionGame
             this.InitializeComponent();
         }
 
-        private void startButton_Click(object sender, RoutedEventArgs e) {
-            this.Frame.Navigate(typeof(Game));
+        private void maintext_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void stratbtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void exitbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Exit();
+        }
+
+        private void introductionbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Introduction));
         }
 
         private void infoButton_Click(object sender, RoutedEventArgs e) {
