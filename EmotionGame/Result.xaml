@@ -8,24 +8,36 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <TextBlock Name="resultTextBlock" Text="Result" 
+        <Grid>
+            <Grid Background="{ThemeResource SystemControlBackgroundAccentBrush}" Opacity="0.6" >
+
+            </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="1" Name="resultTextBlock" Text="Result" 
                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Grid Grid.Row="1" Name="buttonGrid">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Button Name="buttonRetry" Content="再试一次" Height="30" Width="100"
+                <Grid Grid.Row="1" Grid.Column="1" Name="buttonGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Name="buttonRetry" Content="再试一次" Height="30" Width="100"
                     HorizontalAlignment="Center" VerticalAlignment="Center" 
                     Click="buttonRetry_Click"/>
-            <Button Name="buttonShare" Content="分享" Height="30" Width="100"
+                    <Button Name="buttonShare" Content="分享" Height="30" Width="100"
                     HorizontalAlignment="Center" VerticalAlignment="Center"
                     Grid.Column="1" IsEnabled="False"/>
+                </Grid>
+            </Grid>
         </Grid>
     </Grid>
 </Page>

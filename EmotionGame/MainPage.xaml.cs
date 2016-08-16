@@ -28,11 +28,6 @@ namespace EmotionGame
             this.InitializeComponent();
         }
 
-        private void maintext_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void startbtn_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(Game));
@@ -43,16 +38,13 @@ namespace EmotionGame
             Application.Current.Exit();
         }
 
-        private void introductionbtn_Click(object sender, RoutedEventArgs e)
+        private void infoButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(Introduction));
         }
 
-        private void infoButton_Click(object sender, RoutedEventArgs e) {
-
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e) {
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
             // Remove the UI from the title bar if in-app back stack is empty.
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
         }

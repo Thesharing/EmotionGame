@@ -8,20 +8,23 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition Height="2*" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0">this</TextBlock>
-        <Button x:Name="backbtn" Content="返回" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="3" Click="backbtn_Click"/>
-        <TextBlock x:Name="textBox" Grid.Column="1" Margin="0,0,0,0" Grid.Row="1" TextWrapping="Wrap" Grid.ColumnSpan="2">
+        <Grid Background="{ThemeResource SystemControlBackgroundAccentBrush}" Opacity="0.6">
+            
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="2*" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0">this</TextBlock>
+            <Button x:Name="backbtn" Content="返回" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="3" Click="backbtn_Click" FontSize="20"/>
+            <TextBlock x:Name="textBox" Grid.Column="1" Margin="0,0,0,0" Grid.Row="1" TextWrapping="Wrap" Grid.ColumnSpan="2" FontSize="18">
             <Run Text="&#xA;&#xA;简介：这是一个测试默契度的小游戏&#xA;&#xA;屏幕上随机出现图片或文字，根据提示"/>
             <LineBreak/>
             <LineBreak/>
@@ -33,7 +36,8 @@
             <LineBreak/>
             <LineBreak/>
             <Run Text="Enjoy! "/>
-        </TextBlock>
-        <TextBlock x:Name="textBlock" Grid.Column="1" HorizontalAlignment="Left" Text="游戏介绍" VerticalAlignment="Center"  FontSize="25"/>
+            </TextBlock>
+            <TextBlock x:Name="textBlock" Grid.Column="1" HorizontalAlignment="Left" Text="游戏介绍" VerticalAlignment="Center"  FontSize="36" FontWeight="Bold"/>
+        </Grid>
     </Grid>
 </Page>
