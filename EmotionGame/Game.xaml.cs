@@ -227,25 +227,16 @@ namespace EmotionGame
             }
         }
 
-        public double caculate(double[] x, double[] y)
+        public double calculate(double[] x, double[] y)
         {
-            double count1 = 0;
-            double count2 = 0;
-            double count3 = 0;
-            for (int i = 0; i <= 7; i++)
+            double count = 0;
+            for (int i = 0; i < 7; i++)
             {
-                count1 += x[i] * y[i];
+                count += Math.Pow(x[i] - y[i], 2);
             }
-            for (int i = 0; i <= 7; i++)
-            {
-                count2 += x[i] * x[i];
-            }
-            for (int i = 0; i <= 7; i++)
-            {
-                count3 += y[i] * y[i];
-            }
-            Log("1: " + count1.ToString() + " 2: " + count2.ToString() + " 3: " + count3.ToString());
-            return (((count1 / Math.Sqrt(count2 * count3) + 1) * 50) - 90) * 10;
+            count = Math.Sqrt(count / 8) * 50;
+            count = (2 - Math.Log10(count)) * 100;
+            return count;
         }
 
         public double Scores(Emotion emotion1, Emotion emotion2)
@@ -269,7 +260,7 @@ namespace EmotionGame
             y[6] = emotion2.Scores.Sadness;
             y[7] = emotion2.Scores.Surprise;
 
-            return caculate(x, y);
+            return calculate(x, y);
         }
 
         private async void DetectFace()
@@ -302,7 +293,15 @@ namespace EmotionGame
 
             DetectFace();
 
-            //Log(" Scores : " + Scores(emotionResult[0], emotionResult[1]).ToString());
+            try
+            {
+                Log(" Scores : " + Scores(emotionResult[0], emotionResult[1]).ToString());
+            }
+            catch
+            {
+                Log("ERROR");
+            }
+            
 
             imagePreivew.Opacity = 0;
             InitCamera();
