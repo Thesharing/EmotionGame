@@ -46,16 +46,16 @@ namespace EmotionGame
     /// </summary>
     public sealed partial class Game : Page
     {
-        //Emotion API订阅密钥
+        // Emotion API订阅密钥
         private string SubscriptionKey = "af19714575d745d99a3fbf5f5ccf54bf";
-        //图片路径
+        // 图片路径
         private string FilePath = "";
-        private int countdown = 5;
+        private int countdown = 10;
         // 定时器部分
         private DispatcherTimer dispatcherTimer;
         private MediaCapture captureManager;
 
-        //出题部分
+        // 出题部分
         private BitmapImage qimg;
 
         private double age1 = 0;
@@ -81,13 +81,13 @@ namespace EmotionGame
         {
             Log(countdown.ToString());
             countdown--;
-            if (countdown <= 3) {
+            if (countdown <= 5) {
                 Animator.Use(AnimationType.FadeIn).SetDuration(TimeSpan.FromMilliseconds(800)).PlayOn(countdownText);
+                countdownText.Visibility = Visibility.Visible;
                 countdownText.Text = countdown.ToString();
                 if (countdown == 0) {
                     dispatcherTimer.Stop();
                     countdown = 5;
-                    // TODO
                     CapturePhoto();
                 }
             }
@@ -101,11 +101,6 @@ namespace EmotionGame
             await captureManager.StartPreviewAsync();
         }
 
-        private async void CapturePhoto_Click(object sender, RoutedEventArgs e)
-        {
-            CapturePhoto();
-        }
-
         private async void CapturePhoto() {
             progressRing.IsActive = true;
             progressRing.Visibility = Visibility.Visible;
@@ -117,8 +112,10 @@ namespace EmotionGame
                 CreationCollisionOption.GenerateUniqueName);
             // take photo
             await captureManager.CapturePhotoToStorageFileAsync(imgFormat, file);
-            await captureManager.StopPreviewAsync();
-            captureManager.Dispose();
+            if (captureManager != null) {
+                await captureManager.StopPreviewAsync();
+                captureManager.Dispose();
+            }
             await compressImage(file);
 
             // Get photo as a BitmapImage
@@ -154,19 +151,10 @@ namespace EmotionGame
         /// <returns></returns>
         private async Task<Emotion[]> UploadAndDetectEmotions(string imageFilePath)
         {
-            //MainWindow window = (MainWindow)Application.Current.MainWindow;
-            //string subscriptionKey = window.ScenarioControl.SubscriptionKey;
             string subscriptionKey = SubscriptionKey;
 
             Log("EmotionServiceClient is created");
 
-            // -----------------------------------------------------------------------
-            // KEY SAMPLE CODE STARTS HERE
-            // -----------------------------------------------------------------------
-
-            //
-            // Create Project Oxford Emotion API Service client
-            //
             EmotionServiceClient emotionServiceClient = new EmotionServiceClient(subscriptionKey);
 
             Log("Calling EmotionServiceClient.RecognizeAsync()...");
@@ -175,9 +163,6 @@ namespace EmotionGame
                 Emotion[] emotionResult;
                 using (Stream imageFileStream = File.OpenRead(imageFilePath))
                 {
-                    //
-                    // Detect the emotions in the URL
-                    //
                     emotionResult = await emotionServiceClient.RecognizeAsync(imageFileStream);
                     return emotionResult;
                 }
@@ -187,10 +172,6 @@ namespace EmotionGame
                 Log(exception.ToString());
                 return null;
             }
-            // -----------------------------------------------------------------------
-            // KEY SAMPLE CODE ENDS HERE
-            // -----------------------------------------------------------------------
-
         }
 
         public void LogEmotionResult(Emotion[] emotionResult)
@@ -305,11 +286,6 @@ namespace EmotionGame
             }
         }
 
-        private async void Detect_Click(object sender, RoutedEventArgs e)
-        {
-            Detect();
-        }
-
         private async void Detect() {
             Log("Detecting...");
 
@@ -340,26 +316,6 @@ namespace EmotionGame
             Frame.Navigate(typeof(Result),info);
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e) {
-            base.OnNavigatedTo(e);
-            Frame rootFrame = Window.Current.Content as Frame;
-            if (rootFrame.CanGoBack) {
-                // Show UI in title bar if opted-in and in-app backstack is not empty.
-                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
-                    AppViewBackButtonVisibility.Visible;
-            }
-            else {
-                // Remove the UI from the title bar if in-app back stack is empty.
-                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
-                    AppViewBackButtonVisibility.Collapsed;
-            }
-
-            Random rm = new Random();
-            int ranNum = rm.Next(0,20);
-            qimg = new BitmapImage(new Uri("ms-appx:///Image/" + ranNum.ToString() + ".png"));
-            q_image.Source = qimg;
-        }
-
         public async Task compressImage(StorageFile imageFile) {
             using (IRandomAccessStream fileStream = await imageFile.OpenAsync(FileAccessMode.ReadWrite)) {
                 BitmapDecoder decoder = await BitmapDecoder.CreateAsync(fileStream);
@@ -379,6 +335,34 @@ namespace EmotionGame
 
                 memStream.Dispose();
             }
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e) {
+            base.OnNavigatedFrom(e);
+            this.dispatcherTimer.Stop();
+            if (captureManager != null) {
+                captureManager.Dispose();
+            }
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e) {
+            base.OnNavigatedTo(e);
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame.CanGoBack) {
+                // Show UI in title bar if opted-in and in-app backstack is not empty.
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                    AppViewBackButtonVisibility.Visible;
+            }
+            else {
+                // Remove the UI from the title bar if in-app back stack is empty.
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                    AppViewBackButtonVisibility.Collapsed;
+            }
+
+            Random rm = new Random();
+            int ranNum = rm.Next(1, 20);
+            qimg = new BitmapImage(new Uri("ms-appx:///Image/" + ranNum.ToString() + ".png"));
+            q_image.Source = qimg;
         }
     }
 }
