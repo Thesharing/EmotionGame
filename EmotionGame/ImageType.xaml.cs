@@ -39,8 +39,9 @@ namespace EmotionGame
 
         private void next_button_Click(object sender, RoutedEventArgs e)
         {
-            Random rm = new Random(index);
-            int ranNum = rm.Next(11);
+
+            Random rm = new Random(index*2);
+            int ranNum = rm.Next(20);
             img = new BitmapImage(new Uri("ms-appx:///Image/" + ranNum.ToString() + ".png"));
             template_image.Source = img;
             index++;
