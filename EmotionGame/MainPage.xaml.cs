@@ -34,7 +34,7 @@ namespace EmotionGame
 
         private void stratbtn_Click(object sender, RoutedEventArgs e)
         {
-
+            Frame.Navigate(typeof(Game));
         }
 
         private void exitbtn_Click(object sender, RoutedEventArgs e)
