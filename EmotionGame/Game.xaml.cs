@@ -40,6 +40,7 @@ namespace EmotionGame
         public double Age2 { get; set; }
         public string Gender1 { get; set; }
         public string Gender2 { get; set; }
+        public string ImgPath { get; set; }
     }
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -298,14 +299,25 @@ namespace EmotionGame
 
             double score = 0;
             try {
-                Log(" Scores : " + Scores(emotionResult[0], emotionResult[1]).ToString());
+                score = Scores(emotionResult[0], emotionResult[1]);
+                Log(" Scores : " + score.ToString());
+                Info info = new Info();
+                info.Score = score;
+                info.Age1 = age1;
+                info.Age2 = age2;
+                info.Gender1 = gender1;
+                info.Gender2 = gender2;
+                info.ImgPath = FilePath;
+                Frame.Navigate(typeof(Result), info);
             }
             catch {
                 Log("ERROR");
+                Frame.Navigate(typeof(Result));
             }
             imagePreivew.Opacity = 0;
-            InitCamera();
-            Frame.Navigate(typeof(Result));
+            //InitCamera();
+
+            
         }
 
         public async Task compressImage(StorageFile imageFile) {

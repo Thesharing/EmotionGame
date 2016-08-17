@@ -1,0 +1,10 @@
+diff a/EmotionGame/Game.xaml.cs b/EmotionGame/Game.xaml.cs	(rejected hunks)
+@@ -298,8 +298,6 @@
+ 
+             double score = 0;
+             try {
+-                score = Scores(emotionResult[0], emotionResult[1]);
+-                Log(" Scores : " + score.ToString());
+                 Log(" Scores : " + Scores(emotionResult[0], emotionResult[1]).ToString());
+             }
+             catch {
