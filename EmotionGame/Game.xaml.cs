@@ -41,6 +41,7 @@ namespace EmotionGame
         public double Age2 { get; set; }
         public string Gender1 { get; set; }
         public string Gender2 { get; set; }
+        public string ImgPath { get; set; }
     }
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -51,7 +52,7 @@ namespace EmotionGame
         private string SubscriptionKey = "af19714575d745d99a3fbf5f5ccf54bf";
         // 图片路径
         private string FilePath = "";
-        private int countdown = 10;
+        private int countdown = 3;
         // 定时器部分
         private DispatcherTimer dispatcherTimer;
         private MediaCapture captureManager;
@@ -82,13 +83,13 @@ namespace EmotionGame
         {
             Log(countdown.ToString());
             countdown--;
-            if (countdown <= 5) {
+            if (countdown <= 3) {
                 Animator.Use(AnimationType.FadeIn).SetDuration(TimeSpan.FromMilliseconds(800)).PlayOn(countdownText);
                 countdownText.Visibility = Visibility.Visible;
                 countdownText.Text = countdown.ToString();
                 if (countdown == 0) {
                     dispatcherTimer.Stop();
-                    countdown = 5;
+                    countdown = 3;
                     CapturePhoto();
                 }
             }
@@ -249,7 +250,7 @@ namespace EmotionGame
             {
                 count += Math.Pow(x[i] - y[i], 2);
             }
-            count = Math.Sqrt(count / 8) * 50;
+            count = Math.Sqrt(count / 8) * 200;
             count = (2 - Math.Log10(count)) * 100;
             return count;
         }
@@ -309,14 +310,25 @@ namespace EmotionGame
 
             double score = 0;
             try {
-                Log(" Scores : " + Scores(emotionResult[0], emotionResult[1]).ToString());
+                score = Scores(emotionResult[0], emotionResult[1]);
+                Log(" Scores : " + score.ToString());
+                Info info = new Info();
+                info.Score = score;
+                info.Age1 = age1;
+                info.Age2 = age2;
+                info.Gender1 = gender1;
+                info.Gender2 = gender2;
+                info.ImgPath = FilePath;
+                Frame.Navigate(typeof(Result), info);
             }
             catch {
                 Log("ERROR");
+                Frame.Navigate(typeof(Result));
             }
             imagePreivew.Opacity = 0;
-            InitCamera();
-            Frame.Navigate(typeof(Result));
+            //InitCamera();
+
+            
         }
 
         public async Task compressImage(StorageFile imageFile) {
