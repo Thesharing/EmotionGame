@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
+using Windows.Graphics;
 using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;
 
@@ -108,7 +109,25 @@ namespace EmotionGame
                 StreamingCaptureMode = StreamingCaptureMode.AudioAndVideo,
                 VideoDeviceId = cameraDevice.Id
             });
-            await captureManager.InitializeAsync();
+            string currentorientation = Windows.Graphics.Display.DisplayInformation.GetForCurrentView().CurrentOrientation.ToString();
+            switch (currentorientation) {
+                case "Landscape":
+                    captureManager.SetPreviewRotation(VideoRotation.None);
+                    break;
+                case "Portrait":
+                    captureManager.SetPreviewRotation(VideoRotation.Clockwise270Degrees);
+                    break;
+                case "LandscapeFlipped":
+                    captureManager.SetPreviewRotation(VideoRotation.Clockwise180Degrees);
+                    break;
+                case "PortraitFlipped":
+                    captureManager.SetPreviewRotation(VideoRotation.Clockwise90Degrees);
+                    break;
+                default:
+                    captureManager.SetPreviewRotation(VideoRotation.None);
+                    break;
+            }
+            //await captureManager.InitializeAsync();
             capturePreview.Source = captureManager;
             await captureManager.StartPreviewAsync();
         }
@@ -117,18 +136,46 @@ namespace EmotionGame
             progressRing.IsActive = true;
             progressRing.Visibility = Visibility.Visible;
             ImageEncodingProperties imgFormat = ImageEncodingProperties.CreateJpeg();
+            InMemoryRandomAccessStream imageStream = new InMemoryRandomAccessStream();
+            await captureManager.CapturePhotoToStreamAsync(imgFormat, imageStream);
+            BitmapDecoder dec = await BitmapDecoder.CreateAsync(imageStream);
+            BitmapEncoder enc = await BitmapEncoder.CreateForTranscodingAsync(imageStream, dec);
+
+            string currentorientation = Windows.Graphics.Display.DisplayInformation.GetForCurrentView().CurrentOrientation.ToString();
+            switch (currentorientation) {
+                case "Landscape":
+                    enc.BitmapTransform.Rotation = BitmapRotation.None;
+                    break;
+                case "Portrait":
+                    enc.BitmapTransform.Rotation = BitmapRotation.Clockwise270Degrees;
+                    break;
+                case "LandscapeFlipped":
+                    enc.BitmapTransform.Rotation = BitmapRotation.Clockwise180Degrees;
+                    break;
+                case "PortraitFlipped":
+                    enc.BitmapTransform.Rotation = BitmapRotation.Clockwise90Degrees;
+                    break;
+                default:
+                    enc.BitmapTransform.Rotation = BitmapRotation.None;
+                    break;
+            }
+            await enc.FlushAsync();
 
             // create storage file in local app storage
             StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync(
                 "TestPhoto.jpg",
                 CreationCollisionOption.GenerateUniqueName);
+            var filestream = await file.OpenAsync(FileAccessMode.ReadWrite);
+            await RandomAccessStream.CopyAsync(imageStream, filestream);
             // take photo
-            await captureManager.CapturePhotoToStorageFileAsync(imgFormat, file);
+            //await captureManager.CapturePhotoToStorageFileAsync(imgFormat, file);
             if (captureManager != null) {
                 await captureManager.StopPreviewAsync();
                 captureManager.Dispose();
             }
-            await compressImage(file);
+            imageStream.Dispose();
+            filestream.Dispose();
+            //await compressImage(file);
 
             // Get photo as a BitmapImage
             BitmapImage bmpImage = new BitmapImage(new Uri(file.Path));
