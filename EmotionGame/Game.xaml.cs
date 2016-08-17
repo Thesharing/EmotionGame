@@ -30,6 +30,7 @@ using Windows.Graphics.Imaging;
 
 using LLM;
 using Windows.UI.Core;
+using Windows.Devices.Enumeration;
 
 namespace EmotionGame
 {
@@ -96,6 +97,16 @@ namespace EmotionGame
         async private void InitCamera()
         {
             captureManager = new MediaCapture();
+            var allVideoDevices = await DeviceInformation.FindAllAsync(DeviceClass.VideoCapture);
+            // Get the desired camera by panel
+            DeviceInformation cameraDevice =
+                allVideoDevices.FirstOrDefault(x => x.EnclosureLocation != null &&
+                x.EnclosureLocation.Panel == Windows.Devices.Enumeration.Panel.Front);
+            await captureManager.InitializeAsync(new MediaCaptureInitializationSettings {
+                MediaCategory = MediaCategory.Communications,
+                StreamingCaptureMode = StreamingCaptureMode.AudioAndVideo,
+                VideoDeviceId = cameraDevice.Id
+            });
             await captureManager.InitializeAsync();
             capturePreview.Source = captureManager;
             await captureManager.StartPreviewAsync();
