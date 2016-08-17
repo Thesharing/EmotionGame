@@ -51,7 +51,7 @@ namespace EmotionGame
         private string SubscriptionKey = "af19714575d745d99a3fbf5f5ccf54bf";
         // 图片路径
         private string FilePath = "";
-        private int countdown = 10;
+        private int countdown = 3;
         // 定时器部分
         private DispatcherTimer dispatcherTimer;
         private MediaCapture captureManager;
@@ -82,13 +82,13 @@ namespace EmotionGame
         {
             Log(countdown.ToString());
             countdown--;
-            if (countdown <= 5) {
+            if (countdown <= 3) {
                 Animator.Use(AnimationType.FadeIn).SetDuration(TimeSpan.FromMilliseconds(800)).PlayOn(countdownText);
                 countdownText.Visibility = Visibility.Visible;
                 countdownText.Text = countdown.ToString();
                 if (countdown == 0) {
                     dispatcherTimer.Stop();
-                    countdown = 5;
+                    countdown = 3;
                     CapturePhoto();
                 }
             }
@@ -239,7 +239,7 @@ namespace EmotionGame
             {
                 count += Math.Pow(x[i] - y[i], 2);
             }
-            count = Math.Sqrt(count / 8) * 50;
+            count = Math.Sqrt(count / 8) * 200;
             count = (2 - Math.Log10(count)) * 100;
             return count;
         }

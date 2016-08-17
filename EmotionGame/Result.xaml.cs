@@ -125,7 +125,15 @@ namespace EmotionGame
             else
             {
                 Info info = (Info)e.Parameter;
-                this.resultTextBlock.Text = info.Score.ToString();
+                if (Convert.ToInt16(info.Score) > 100)
+                {
+                    this.resultTextBlock.Text = "99";
+                }
+                else
+                {
+                    this.resultTextBlock.Text = Convert.ToInt32(info.Score).ToString();
+                }
+
                 BitmapImage bmpImage = new BitmapImage(new Uri(info.ImgPath));
                 this.image.Source = bmpImage;
                 this.commentTextBlock.Text = evaluate(info.Score, info.Age1, info.Age2, info.Gender1, info.Gender2);
