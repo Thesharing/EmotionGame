@@ -12,4 +12,4 @@
 
 Enjoy!
 
-Copyright @ 2016 by Team 8 including [Mtobeiyf](https://github.com/mtobeiyf) (Xin Fu), [Thesharing](github.com/thesharing) (Zhilong Hong), [MYoung](https://github.com/0237) (Xudong Yang), Shiqi Lv and Shichang Li.
+Copyright @ 2016 by Team 8 including [Mtobeiyf](https://github.com/mtobeiyf) (Xin Fu), [Thesharing](github.com/thesharing) (Zhilong Hong), [MYoung](https://github.com/0237) (Xudong Yang), [liangmuren](https://github.com/liangmuren) (Xuefeng Fan), [lizzy9633](https://github.com/lizzy9633) (Shiqi Lv) and Shichang Li.
