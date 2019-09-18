@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -27,9 +28,25 @@ namespace EmotionGame
             this.InitializeComponent();
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void startbtn_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(ImageType));
+            Frame.Navigate(typeof(Game));
+        }
+
+        private void exitbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Exit();
+        }
+
+        private void infoButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Introduction));
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            // Remove the UI from the title bar if in-app back stack is empty.
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
         }
     }
 }
